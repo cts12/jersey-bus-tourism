@@ -31,20 +31,25 @@ function initialize_map()
 }
 function initialize()
 {
+	var output = document.getElementById('current');
+	
 	if(navigator.geolocation)
 	{
-		document.getElementById('current').innerHTML="Receiving...";
-		navigator.geolocation.getCurrentPosition(show_position,function(){document.getElementById('current').innerHTML="Couldn't get location"},{enableHighAccuracy:true});
+		output.innerHTML="Receiving...";
+		navigator.geolocation.getCurrentPosition(show_position,function(){output.innerHTML="Couldn't get location"},{enableHighAccuracy:true});
 	}
 	else
 	{
-		document.getElementById('current').innerHTML="Functionality not available";
+		output.innerHTML="Functionality not available";
 	}
 }
 
 function show_position(p)
 {
-	document.getElementById('current').innerHTML="latitude="+p.coords.latitude.toFixed(2)+" longitude="+p.coords.longitude.toFixed(2);
+	var output = document.getElementById('current');
+	
+	output.innerHTML="latitude="+p.coords.latitude.toFixed(5)+" longitude="+p.coords.longitude.toFixed(5);
+	
 	var pos=new google.maps.LatLng(p.coords.latitude,p.coords.longitude);
 	map.setCenter(pos);
 	map.setZoom(14);
