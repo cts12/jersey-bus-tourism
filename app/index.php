@@ -1,12 +1,10 @@
 <?php
 require '../vendor/autoload.php';
-?>
 
-<html>
-<body>
-<h4> Welcome </h4>
+$app = new \Slim\Slim();
 
+$app->get('/hello/:name', function ($name) {
+    echo "Hello, $name";
+});
 
-</body>
-</html>
-
+$app->run();
