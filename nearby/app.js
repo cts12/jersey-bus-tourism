@@ -8,8 +8,7 @@ var map = new google.maps.Map(document.getElementById('map-canvas'), {
 var infowindow = new google.maps.InfoWindow();
 var marker, i;
 
-function goingTo(place)
-{
+function goingTo(place) {
 
 }
 
@@ -150,38 +149,38 @@ function getGeo() {
 function getNearbyStopPoints(place) {
 
     var html = [];
-    DepartureTime
-        var journey = Enumerable.From(journeyCodes)
-                    .Where(function (x) { return x.Destination == place })
-            .Where(function (x) { return x.DepartureTime > Date() })
-                    .Select(function (x) { return x.Latitude+':'+ x.Longitude })
-                    .ToArray();
+    
+    var journey = Enumerable.From(journeyCodes)
+                .Where(function (x) { return x.Destination == place })
+                //.Where(function (x) { return x.DepartureTime > Date() })
+                .Select(function (x) { return x.Latitude + ':' + x.Longitude })
+                .ToArray();
 
-        /* loop through array */
-        $.each(journey, function (index, d) {
+    /* loop through array */
+    $.each(journey, function (index, d) {
 
-            var cord = d.split(':');
+        var cord = d.split(':');
 
-            var dist = getDistanceInKm(myLocation.Latitude, myLocation.Longitude, cord[0], cord[1]);
-            html.push({ Latitude: cord[0], Longitude: cord[1], distance: dist });
+        var dist = getDistanceInKm(myLocation.Latitude, myLocation.Longitude, cord[0], cord[1]);
+        html.push({ Latitude: cord[0], Longitude: cord[1], distance: dist });
+    });
+
+    html.sort(SortByDistance);
+
+    // nearby Markers
+    for (i = 0; i < 5; i++) {
+        marker = new google.maps.Marker({
+            position: new google.maps.LatLng(html[i].Latitude, html[i].Longitude),
+            map: map
         });
 
-        html.sort(SortByDistance);
-
-        // nearby Markers
-        for (i = 0; i < 5; i++) {
-            marker = new google.maps.Marker({
-                position: new google.maps.LatLng(html[i].Latitude, html[i].Longitude),
-                map: map
-            });
-
-            google.maps.event.addListener(marker, 'click', (function (marker, i) {
-                return function () {
-                    infowindow.setContent('' + html[i].Name + '<br>' + html[i].distance.toFixed(2) + 'km');
-                    infowindow.open(map, marker);
-                }
-            })(marker, i));
-        }
+        google.maps.event.addListener(marker, 'click', (function (marker, i) {
+            return function () {
+                infowindow.setContent('' + html[i].Name + '<br>' + html[i].distance.toFixed(2) + 'km');
+                infowindow.open(map, marker);
+            }
+        })(marker, i));
+    }
 
 }
 
@@ -199,7 +198,7 @@ function getJourneyCodes(callback) {
 
     var html = [];
     $.ajax({
-        url: 'journey-codes.json',
+        url: 'routes.json',
         async: false,
         type: 'GET',
         dataType: 'json',
