@@ -8,6 +8,8 @@
 	<meta name="keywords" content="<?=$meta['keywords']?>"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800,700,600' rel='stylesheet' type='text/css'>
+
 	<link rel="stylesheet" href="app/views/css/normalize.css">
 	<link rel="stylesheet" href="app/views/css/main.css">
 </head>
