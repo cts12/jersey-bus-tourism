@@ -1,4 +1,11 @@
 <?php
+$meta = array(
+	'title' => 'Get a Bus | Omnibus #hackjsy 2014',
+	'description' => '',
+	'keywords' => ''
+);
+$heading = 'GET A BUS TO...';
+
 require 'app/views/header.php' ;
 ?>
  <!-- CONTENT SECTION -->
