@@ -1,10 +1,3 @@
-/*
-var map = new google.maps.Map(document.getElementById('map-canvas'), {
-    zoom: 14,
-    center: new google.maps.LatLng(myLocation.Latitude, myLocation.Longitude),
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-});
-*/
 var infowindow = new google.maps.InfoWindow();
 var marker, i;
 
@@ -26,10 +19,7 @@ function myLocationMarker(myLocation)
 
 }
 
-function getLiveBus() {
-
-    
-
+function getLiveBus(myLocation) {
 
     var html = [];
     $.ajax({
@@ -85,7 +75,7 @@ function getLiveBus() {
 }
 
 
-function getNearbyStopPoints() {
+function getNearbyStopPoints(myLocation) {
 
     var html = [];
     $.getJSON("bus-stops.json", function (data) {

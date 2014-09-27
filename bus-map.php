@@ -1,13 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Hackathon Buses</title>	
-</head>
-<body>
+<?php
+require 'app/views/header.php' ;
+?>
+ <!-- CONTENT SECTION -->
+            <div id="content-home">
 
-	<div id="panel"></div>
-	<div id="map-canvas" style="width:100%; height:600px"></div>
+				<div id="panel"></div>
+				<div id="map-canvas" style="width:100%; height:600px"></div>
+
+            </div>
+ <!-- END OF CONTENT SECTION -->
 	
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="//maps.google.com/maps/api/js?v=3.exp"></script>
@@ -25,7 +26,7 @@
 		
 		function initialize(user) {	
 			
-			myLocation = {
+			var myLocation = {
 				Latitude: user.coords.latitude.toFixed(5),
 				Longitude: user.coords.longitude.toFixed(5)
 			}
@@ -33,17 +34,19 @@
 			var mapOptions = {
 				zoom: 16,
 				center: new google.maps.LatLng(myLocation.Latitude, myLocation.Longitude),
+				mapTypeId: google.maps.MapTypeId.ROADMAP
 			  };
 
 			map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
 		
 			myLocationMarker(myLocation);
-			//getLiveBus();
-			getNearbyStopPoints();
+			//getLiveBus(myLocation);
+			getNearbyStopPoints(myLocation);
 		}
 
 	});
 </script>
-<script src="/app.js"></script>
-</body>
-</html>
+<script src="/app/js/app.js"></script>
+
+<?php 
+require 'app/views/footer.php';
