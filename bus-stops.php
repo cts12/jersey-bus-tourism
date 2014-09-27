@@ -8,13 +8,26 @@
 
 	<div id="current">Initializing...</div>
 	<div id="map_canvas" style="width:100%; height:500px"></div>
-
+	<div id="json"></div>
+	
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="//code.google.com/apis/gears/gears_init.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" src="//maps.google.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript">
 initialize_map();
 initialize();
+
+$(function(){
+	$.ajax({ 
+		type: 'GET', 
+		url: 'csv-to-json.php', 
+		data: { get_param: 'value' }, 
+		dataType:'json',
+		success: function (data) { 
+			$('#json').html(data);
+		}
+	});
+});
 
 function initialize_map()
 {
