@@ -6,17 +6,14 @@
 </head>
 <body>
 
-	<div id="current">Initializing...</div>
-	<div id="map_canvas" style="width:100%; height:600px"></div>
-	<div id="json"></div>
+	<div id="output">Initializing...</div>
+	<div id="gmap" style="width:100%; height:600px"></div>
 	
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript" src="//maps.google.com/maps/api/js?sensor=true"></script>
+<script type="text/javascript" src="/app/js/maplace-0.1.3.min.js"></script>
 <script type="text/javascript">
-//initialize_map();
-//initialize();
-
-$(function(){
+$(function(){	
 	$.ajax({ 
 		type: 'GET', 
 		url: 'bus-stops.json', 
@@ -24,21 +21,65 @@ $(function(){
 		beforeSend:function(){},
 		success: function (data) { 
 			//console.log(data);
-			
-			var count = 0;
-			$(data).each(function(i,val){
-				//if(count < 20){
-					show_position(val);
-					++count;
-				//}
-			});
+			get_stop_positions(data);
 		},
 		error: function(data){
 			console.log('Error: ' + data);
 		}
 	});
+	
+	
+	function get_user_location(){
+		var output = $('output');
+		
+		if(navigator.geolocation){
+			output.html('Receiving...');
+			navigator.geolocation.getCurrentPosition(get_user_position,function(){output.html('Couldn\'t find your location')},{enableHighAccuracy:true,timeout:10000});
+		} else{
+			output.html('Functionality not available');
+		}
+		
+		return;
+	}
+	
+	function get_user_position(user){
+		
+		var userLocation = [{
+			lat: user.coords.latitude.toFixed(5), 
+			lon: user.coords.longitude.toFixed(5),
+			title: 'You are here'
+		}];
+	
+		return userLocation;
+	}
+	
+	function get_stop_positions(stops){
+	
+		var stopLocations = [];
+		if(typeof stops == 'object'){
+			
+			$(stops).each(function(k,stop){
+				var busStops = {};
+				
+				busStops['lat'] = stop.Latitude;
+				busStops['lon'] = stop.Longitude;
+				busStops['title'] = 'Bus Stop: ' + stop.Code + ' : ' + stop.Name;
+				
+				stopLocations.push(busStops);
+			});
+			
+			var userLocation = get_user_position();
+
+			console.log(userLocation);
+			
+			return;
+			//return load_map(stopLocations);
+		}
+		
+	}
 });
 
+/*
 function initialize_map()
 {
     var myOptions = {
@@ -106,6 +147,7 @@ function show_position(position)
 	});
 	
 }
+*/
 </script>
 </body>
 </html>
