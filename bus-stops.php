@@ -11,11 +11,10 @@
 	<div id="json"></div>
 	
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="//code.google.com/apis/gears/gears_init.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript" src="//maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="//maps.google.com/maps/api/js?sensor=true"></script>
 <script type="text/javascript">
-initialize_map();
-initialize();
+//initialize_map();
+//initialize();
 
 $(function(){
 	$.ajax({ 
@@ -72,11 +71,11 @@ function show_position(position)
 {
 
 	if(typeof position == 'object'){
-		if(!Object.keys(position).length){
+		if(!Object.keys(position).length){ // user
 			var latitude = position.coords.latitude.toFixed(5),
 				longitude = position.coords.longitude.toFixed(5),
 				pinInfo = 'You are here';
-		} else {
+		} else { // bus stops
 			var latitude = position.Latitude,
 				longitude = position.Longitude,
 				pinInfo = 'Bus Stop: ' + position.Code + ' : ' + position.Name;
