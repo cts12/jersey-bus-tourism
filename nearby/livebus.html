@@ -13,7 +13,7 @@
 
         #map-canvas {
             height: 500px;
-            width: 700px;
+            width: 900px;
         }
 
         #panel {
@@ -34,14 +34,18 @@
     <script>
 
         var myLocation = {
-            Latitude: 49.1678315,
-            Longitude: -2.0710084
+            Latitude: 49.1778315,
+            Longitude: -2.0810084
         }
 
+        var journeyCodes = [];
+
         function initialize() {
+            getJourneyCodes();
             myLocationMarker();
             getLiveBus();
-            getNearbyStopPoints();
+            getGeo();
+            //getNearbyStopPoints();
         }
 
 

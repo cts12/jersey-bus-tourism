@@ -8,8 +8,7 @@ var map = new google.maps.Map(document.getElementById('map-canvas'), {
 var infowindow = new google.maps.InfoWindow();
 var marker, i;
 
-function myLocationMarker()
-{
+function myLocationMarker() {
     // my Location Marker
     marker = new google.maps.Marker({
         position: new google.maps.LatLng(myLocation.Latitude, myLocation.Longitude),
@@ -28,9 +27,6 @@ function myLocationMarker()
 
 function getLiveBus() {
 
-    
-
-
     var html = [];
     $.ajax({
         url: 'https://bus.data.je/latest',
@@ -41,6 +37,13 @@ function getLiveBus() {
 
             /* loop through array */
             $.each(data, function (i, d) {
+
+                var jCode = d[0].MonitoredVehicleJourney.BlockRef;
+
+                var journey = Enumerable.From(journeyCodes)
+                    .Where(function (x) { return x.Code == jCode })
+                    .Select(function (x) { return x.Routes_Description })
+                    .ToArray();
 
 
                 var location = {
@@ -53,7 +56,7 @@ function getLiveBus() {
                 if (d[0].MonitoredVehicleJourney.DirectionRef == 'inbound')
                     direction = 'Going to Town'
                 else
-                    direction = 'Leaving Town'
+                    return;//direction = 'Leaving Town'
 
                 var line = {
                     lineRef: d[0].MonitoredVehicleJourney.LineRef,
@@ -64,6 +67,60 @@ function getLiveBus() {
                     position: new google.maps.LatLng(location.Latitude, location.Longitude),
                     map: map,
                     icon: 'Marker24-2.png'
+                });
+
+                google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                    return function () {
+                        infowindow.setContent('<p>' + journey + '</p><p>Line: ' + line.lineRef + '</p><p>' + line.direction + '</p>');
+                        infowindow.open(map, marker);
+                    }
+                })(marker, i));
+            });
+
+
+        },
+        error: function () { alert('boo!'); },
+
+    });
+
+
+}
+
+function getGeo() {
+
+    var html = [];
+    $.ajax({
+        url: 'https://bus.data.je/geo/' + myLocation.Latitude + '/' + myLocation.Longitude,
+        type: 'GET',
+        dataType: 'json',
+        beforeSend: setHeader,
+        success: function (data) {
+
+            /* loop through array */
+            $.each(data, function (i, d) {
+
+
+                var location = {
+                    Latitude: d.loc.coordinates[1],
+                    Longitude: d.loc.coordinates[0]
+                }
+
+
+                var direction = '';
+                if (d.MonitoredVehicleJourney.DirectionRef == 'inbound')
+                    direction = 'Going to Town'
+                else
+                    return;//direction = 'Leaving Town'
+
+                var line = {
+                    lineRef: d.MonitoredVehicleJourney.LineRef,
+                    direction: direction
+                }
+
+                marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(location.Latitude, location.Longitude),
+                    map: map,
+                    icon: 'Marker24-3.png'
                 });
 
                 google.maps.event.addListener(marker, 'click', (function (marker, i) {
@@ -80,10 +137,7 @@ function getLiveBus() {
 
     });
 
-    getNearbyStopPoints(myLocation);
-
 }
-
 
 function getNearbyStopPoints() {
 
@@ -99,7 +153,7 @@ function getNearbyStopPoints() {
         var html2 = html.sort(SortByDistance);
 
         // nearby Markers
-        for (i = 0; i < 5; i++) {
+        for (i = 0; i < 20; i++) {
             marker = new google.maps.Marker({
                 position: new google.maps.LatLng(html2[i].Latitude, html2[i].Longitude),
                 map: map
@@ -119,7 +173,36 @@ function getNearbyStopPoints() {
         alert("error occurred!");
     });
 
-   
+
+}
+
+function getJourneyCodes(callback) {
+
+    //var html = [];
+    //$.getJSON("journey-codes.json", function (data) {
+
+    //    callback(data);
+
+    //}).error(function (jqXHR, textStatus, errorThrown) { /* assign handler */
+    //    /* alert(jqXHR.responseText) */
+    //    alert("error occurred!");
+    //});
+
+    var html = [];
+    $.ajax({
+        url: 'journey-codes.json',
+        async: false,
+        type: 'GET',
+        dataType: 'json',
+        beforeSend: setHeader,
+        success: function (data) {
+            journeyCodes = data;
+        },
+        error: function () { alert('boo!'); },
+
+    });
+
+
 }
 
 function getDistanceInKm(lat1, lon1, lat2, lon2) {
