@@ -33,6 +33,8 @@ require 'app/views/header.php' ;
 		
 		function initialize(user) {	
 			
+			//console.log(user);
+			
 			var myLocation = {
 				Latitude: user.coords.latitude.toFixed(5),
 				Longitude: user.coords.longitude.toFixed(5)
@@ -47,7 +49,7 @@ require 'app/views/header.php' ;
 			map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
 		
 			myLocationMarker(myLocation);
-			//getLiveBus(myLocation);
+			getLiveBus(myLocation);
 			getNearbyStopPoints(myLocation);
 		}
 

@@ -25,3 +25,6 @@
 		</div>
 	<!-- END OF HEADER SECTION -->
 	
+<?
+unset($meta);
+unset($heading);

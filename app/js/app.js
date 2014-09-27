@@ -66,7 +66,7 @@ function getLiveBus(myLocation) {
 
 
         },
-        error: function () { alert('boo!'); },
+        error: function () { console.log('boo!'); },
 
     });
 
@@ -106,7 +106,7 @@ function getNearbyStopPoints(myLocation) {
 
     }).error(function (jqXHR, textStatus, errorThrown) { /* assign handler */
         /* alert(jqXHR.responseText) */
-        alert("error occurred!");
+        console.log("error occurred!");
     });
 
    
