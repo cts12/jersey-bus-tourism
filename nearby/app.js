@@ -170,7 +170,7 @@ function getNearbyStopPoints(place) {
         points.push({ Latitude: cord[0], Longitude: cord[1], distance: dist, lineRef: cord[2] });
     });
 
-    points.sort(SortByDistance);
+   points.sort(SortByDistance);
 
     // nearby Markers
     for (i = 0; i < 5; i++) {
@@ -193,16 +193,7 @@ function getNearbyStopPoints(place) {
 
 function getJourneyCodes(callback) {
 
-    //var html = [];
-    //$.getJSON("journey-codes.json", function (data) {
-
-    //    callback(data);
-
-    //}).error(function (jqXHR, textStatus, errorThrown) { /* assign handler */
-    //    /* alert(jqXHR.responseText) */
-    //    alert("error occurred!");
-    //});
-
+    
     var html = [];
     $.ajax({
         url: 'routes.json',
