@@ -29,13 +29,14 @@
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="linq.min.js"></script>
     <script>
 
         function initialize() {
 
             var myLocation = {
-                Latitude:49.1618315,
-                Longitude: -2.0780994
+                Latitude:49.1678315,
+                Longitude: -2.0710084
             }
 
             var map = new google.maps.Map(document.getElementById('map-canvas'), {
@@ -49,22 +50,24 @@
 
 
             var html = [];
-            $.getJSON("http://localhost:49575/bus-stops.json", function (data) {
+            $.getJSON("bus-stops.json", function (data) {
 
                 /* loop through array */
                 $.each(data, function (index, d) {
                     var dist = getDistanceInKm(myLocation.Latitude, myLocation.Longitude, d.Latitude, d.Longitude);
-                    html.push({ Latitude: d.Latitude, Longitude: d.Longitude, distance: dist });
+                    html.push({ Name:d.Name, Latitude: d.Latitude, Longitude: d.Longitude, distance: dist });
                 });
 
                 var html2 = html.sort(SortByDistance);
 
+                // my Location Marker
                 marker = new google.maps.Marker({
                     position: new google.maps.LatLng(myLocation.Latitude, myLocation.Longitude),
                     map: map,
                     icon: 'marker.jpg'
                 });
 
+                // nearby Markers
                 for (i = 0; i < 5; i++) {
                     marker = new google.maps.Marker({
                         position: new google.maps.LatLng(html2[i].Latitude, html2[i].Longitude),
@@ -73,7 +76,7 @@
 
                     google.maps.event.addListener(marker, 'click', (function (marker, i) {
                         return function () {
-                            infowindow.setContent('' + html2[i].distance);
+                            infowindow.setContent('' + html2[i].Name + '<br>' + html2[i].distance.toFixed(2) + 'km');
                             infowindow.open(map, marker);
                         }
                     })(marker, i));
@@ -121,6 +124,5 @@
     </div>
     <div id="map-canvas"></div>
     <br>
-    <div id="console">aaaa</div>
 </body>
 </html>
