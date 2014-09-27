@@ -209,7 +209,6 @@ body {
     width:100%;
     background: #f7f7f7;
     margin:0 auto;
-
     height:568px;
 }
 
@@ -227,6 +226,13 @@ body {
     background:#ececec;
     text-align: center;
     padding-bottom: 50px;
+}
+
+#content-home {
+    padding:0px;
+    background:#ececec;
+    text-align: center;
+
 }
 
 h1 {
@@ -290,6 +296,15 @@ a:focus .btn, a:hover .btn, a:active .btn {
     margin:20px auto;
 }
 
+.btn-home-options {
+  width:100%;
+  padding:70px 0 30px;
+  border-bottom:1px solid #d6d6d6;
+}
+.btn-home-options:last-of-type {
+  border-bottom:0px;
+}
+
 .map-text {
     text-align: center;
     margin:20px;
@@ -313,6 +328,26 @@ a:focus .btn, a:hover .btn, a:active .btn {
     text-align: center;
     background: #ececec;
     font-size: 1.2rem;
+}
+
+.home-icon {
+  margin:0 auto;
+  width:50%;
+  height:150px;
+}
+.home-icon a {
+  background: #ccc;
+  color:green;
+}
+
+.home-icon a:hover, .home-icon a:focus, .home-icon a:active {
+  background: #6dbd2b;
+  color:white;
+}
+
+.home-icon img{
+  margin-bottom: 20px;
+  height:75px;
 }
 
 
