@@ -7,7 +7,7 @@
 <body>
 
 	<div id="current">Initializing...</div>
-	<div id="map_canvas" style="width:100%; height:500px"></div>
+	<div id="map_canvas" style="width:100%; height:600px"></div>
 	<div id="json"></div>
 	
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -26,28 +26,11 @@ $(function(){
 		success: function (data) { 
 			//console.log(data);
 			
-			var count = 0,
-				latitude = '',
-				longitude = '';
+			var count = 0;
 			$(data).each(function(i,val){
 				//if(count < 20){
-					$.each(val,function(k,v){
-						if(k == 'Latitude'){
-							latitude = v;
-						}
-						
-						if(k == 'Longitude'){
-							longitude = v;
-							++count;
-						}
-						
-						if(longitude.length){
-							show_position('',latitude,longitude);
-							
-							latitude = '';
-							longitude = '';
-						}
-					})
+					show_position(val);
+					++count;
 				//}
 			});
 		},
@@ -85,14 +68,21 @@ function initialize()
 	}
 }
 
-function show_position(p,latitude,longitude)
+function show_position(position)
 {
-	if(typeof p == 'object'){
-		latitude = p.coords.latitude.toFixed(5);
-		longitude = p.coords.longitude.toFixed(5);
+
+	if(typeof position == 'object'){
+		if(!Object.keys(position).length){
+			var latitude = position.coords.latitude.toFixed(5),
+				longitude = position.coords.longitude.toFixed(5),
+				pinInfo = 'You are here';
+		} else {
+			var latitude = position.Latitude,
+				longitude = position.Longitude,
+				pinInfo = 'Bus Stop: ' + position.Code + ' : ' + position.Name;
+		}
 	}
 	
-	console.log(latitude);
 	
 	var output = document.getElementById('current');
 	
@@ -103,13 +93,13 @@ function show_position(p,latitude,longitude)
 	map.setZoom(14);
 
 	var infowindow = new google.maps.InfoWindow({
-	    content: "<strong>yes</strong>"
+	    content: pinInfo
 	});
 
 	var marker = new google.maps.Marker({
 	    position: pos,
 	    map: map,
-	    title:"You are here"
+	    title:"Nearest Bus Stops"
 	});
 
 	google.maps.event.addListener(marker, 'click', function() {
