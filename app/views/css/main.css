@@ -203,6 +203,7 @@ body {
     background: #f7f7f7;
     color: #333;
     font-size:16px;
+    font-family: 'Open Sans', sans-serif;
 }
 
 #container {
@@ -245,12 +246,12 @@ body {
 h1 {
     font-size:1.2em;
     text-align: center;
-    padding:10px 0 7px;
+    padding:15px 0;
     background:#f7f7f7;
     color:#333;
     border-top:1px solid #7abb43;
     border-bottom:1px solid #d6d6d6;
-    font-weight:400;
+    font-weight:600;
 }
 
 p { margin-bottom:0.8rem;}
@@ -346,8 +347,8 @@ a:focus .btn, a:hover .btn, a:active .btn {
 
 .home-icon {
   margin:0 auto;
-  width:50%;
-  height:150px;
+  width:100%;
+  height:100px;
 }
 .home-icon a {
   background: #ccc;
