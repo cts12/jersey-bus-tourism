@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Directions service</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        #map-canvas {
+            height: 500px;
+            width: 700px;
+        }
+
+        #panel {
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            margin-left: -180px;
+            z-index: 5;
+            background-color: #fff;
+            padding: 5px;
+            border: 1px solid #999;
+        }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="linq.min.js"></script>
+    
+    <script>
+
+        var myLocation = {
+            Latitude: 49.1678315,
+            Longitude: -2.0710084
+        }
+
+        function initialize() {
+            myLocationMarker();
+            getLiveBus();
+            getNearbyStopPoints();
+        }
+
+
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+</head>
+<body>
+    <div id="panel">
+    </div>
+    <div id="map-canvas"></div>
+    <br>
+</body>
+</html>
+
+<script src="app.js"></script>
