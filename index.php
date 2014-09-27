@@ -4,7 +4,7 @@ require 'app/views/header.php' ;
  <!-- CONTENT SECTION -->
             <div id="content-home">
                 <div class="btn-home-options">
-                    <a href="/bus-stops.php">
+                    <a href="/bus-map.php">
                     <div class="home-icon">
                         <img src="app/views/img/bus_stop_icon.png" alt="bus stop icon" />
                     <p>Find nearest Bus Stop</p>
@@ -13,7 +13,7 @@ require 'app/views/header.php' ;
                 </div>
 
                 <div class="btn-home-options">
-                    <a href="pickdestination.html">
+                    <a href="pick-destination.php">
                     <div class="home-icon">
                          <img src="app/views/img/destination_icon.png" alt="destination icon" />
                     <p>Choose a Destination</p>
@@ -22,12 +22,7 @@ require 'app/views/header.php' ;
                 </div>
 
             </div>
-        <!-- END OF CONTENT SECTION -->
-
+ <!-- END OF CONTENT SECTION -->
 
 <?php 
-
 require 'app/views/footer.php';
-
-?>
-
