@@ -20,11 +20,39 @@ initialize();
 $(function(){
 	$.ajax({ 
 		type: 'GET', 
-		url: 'csv-to-json.php', 
-		data: { get_param: 'value' }, 
+		url: 'bus-stops.json', 
 		dataType:'json',
+		beforeSend:function(){},
 		success: function (data) { 
-			$('#json').html(data);
+			//console.log(data);
+			
+			var count = 0,
+				latitude = '',
+				longitude = '';
+			$(data).each(function(i,val){
+				//if(count < 20){
+					$.each(val,function(k,v){
+						if(k == 'Latitude'){
+							latitude = v;
+						}
+						
+						if(k == 'Longitude'){
+							longitude = v;
+							++count;
+						}
+						
+						if(longitude.length){
+							show_position('',latitude,longitude);
+							
+							latitude = '';
+							longitude = '';
+						}
+					})
+				//}
+			});
+		},
+		error: function(data){
+			console.log('Error: ' + data);
 		}
 	});
 });
@@ -41,6 +69,7 @@ function initialize_map()
 	    }	
 	map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 }
+
 function initialize()
 {
 	var output = document.getElementById('current');
@@ -56,13 +85,20 @@ function initialize()
 	}
 }
 
-function show_position(p)
+function show_position(p,latitude,longitude)
 {
+	if(typeof p == 'object'){
+		latitude = p.coords.latitude.toFixed(5);
+		longitude = p.coords.longitude.toFixed(5);
+	}
+	
+	console.log(latitude);
+	
 	var output = document.getElementById('current');
 	
-	output.innerHTML="latitude="+p.coords.latitude.toFixed(5)+" longitude="+p.coords.longitude.toFixed(5);
+	output.innerHTML="latitude="+latitude+" longitude="+longitude;
 	
-	var pos=new google.maps.LatLng(p.coords.latitude,p.coords.longitude);
+	var pos=new google.maps.LatLng(latitude,longitude);
 	map.setCenter(pos);
 	map.setZoom(14);
 
