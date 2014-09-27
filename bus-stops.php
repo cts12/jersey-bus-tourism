@@ -7,7 +7,7 @@
 <body>
 
 	<div id="current">Initializing...</div>
-	<div id="map_canvas" style="width:100%; height:500px"></div>
+	<div id="map_canvas" style="width:100%; height:600px"></div>
 	<div id="json"></div>
 	
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -20,11 +20,22 @@ initialize();
 $(function(){
 	$.ajax({ 
 		type: 'GET', 
-		url: 'csv-to-json.php', 
-		data: { get_param: 'value' }, 
+		url: 'bus-stops.json', 
 		dataType:'json',
+		beforeSend:function(){},
 		success: function (data) { 
-			$('#json').html(data);
+			//console.log(data);
+			
+			var count = 0;
+			$(data).each(function(i,val){
+				//if(count < 20){
+					show_position(val);
+					++count;
+				//}
+			});
+		},
+		error: function(data){
+			console.log('Error: ' + data);
 		}
 	});
 });
@@ -41,6 +52,7 @@ function initialize_map()
 	    }	
 	map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 }
+
 function initialize()
 {
 	var output = document.getElementById('current');
@@ -56,24 +68,38 @@ function initialize()
 	}
 }
 
-function show_position(p)
+function show_position(position)
 {
+
+	if(typeof position == 'object'){
+		if(!Object.keys(position).length){
+			var latitude = position.coords.latitude.toFixed(5),
+				longitude = position.coords.longitude.toFixed(5),
+				pinInfo = 'You are here';
+		} else {
+			var latitude = position.Latitude,
+				longitude = position.Longitude,
+				pinInfo = 'Bus Stop: ' + position.Code + ' : ' + position.Name;
+		}
+	}
+	
+	
 	var output = document.getElementById('current');
 	
-	output.innerHTML="latitude="+p.coords.latitude.toFixed(5)+" longitude="+p.coords.longitude.toFixed(5);
+	output.innerHTML="latitude="+latitude+" longitude="+longitude;
 	
-	var pos=new google.maps.LatLng(p.coords.latitude,p.coords.longitude);
+	var pos=new google.maps.LatLng(latitude,longitude);
 	map.setCenter(pos);
 	map.setZoom(14);
 
 	var infowindow = new google.maps.InfoWindow({
-	    content: "<strong>yes</strong>"
+	    content: pinInfo
 	});
 
 	var marker = new google.maps.Marker({
 	    position: pos,
 	    map: map,
-	    title:"You are here"
+	    title:"Nearest Bus Stops"
 	});
 
 	google.maps.event.addListener(marker, 'click', function() {
