@@ -38,14 +38,19 @@
             Longitude: -2.0810084
         }
 
-        var journeyCodes = [];
+ 
 
         function initialize() {
             getJourneyCodes();
             myLocationMarker();
             getLiveBus();
             getGeo();
-            getNearbyStopPoints('Bus Station');
+
+            //Corbiere
+            //L'Etacq
+            //Durrell
+            // Bus Station
+            getNearbyStopPoints('Corbiere');
         }
 
 
@@ -57,6 +62,8 @@
     <div id="panel">
     </div>
     <div id="map-canvas"></div>
+    <button onclick="showResult()">Result</button>
+    <div id="result">result</div>
     <br>
 </body>
 </html>
