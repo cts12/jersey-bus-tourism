@@ -1,4 +1,11 @@
 <?php
+$meta = array(
+	'title' => 'Your Nearest Bus Stops',
+	'description' => '',
+	'keywords' => ''
+);
+$heading = 'YOUR NEAREST BUS STOPS';
+
 require 'app/views/header.php' ;
 ?>
  <!-- CONTENT SECTION -->
@@ -32,7 +39,7 @@ require 'app/views/header.php' ;
 			}
 			
 			var mapOptions = {
-				zoom: 16,
+				zoom: 17,
 				center: new google.maps.LatLng(myLocation.Latitude, myLocation.Longitude),
 				mapTypeId: google.maps.MapTypeId.ROADMAP
 			  };
