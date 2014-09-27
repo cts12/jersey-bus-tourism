@@ -8,6 +8,11 @@ var map = new google.maps.Map(document.getElementById('map-canvas'), {
 var infowindow = new google.maps.InfoWindow();
 var marker, i;
 
+function goingTo(place)
+{
+
+}
+
 function myLocationMarker() {
     // my Location Marker
     marker = new google.maps.Marker({
@@ -38,11 +43,14 @@ function getLiveBus() {
             /* loop through array */
             $.each(data, function (i, d) {
 
-                var jCode = d[0].MonitoredVehicleJourney.BlockRef;
+                var LineRef = d[0].MonitoredVehicleJourney.LineRef;
+                var DirectionRef = d[0].MonitoredVehicleJourney.DirectionRef;
 
                 var journey = Enumerable.From(journeyCodes)
-                    .Where(function (x) { return x.Code == jCode })
+                    .Where(function (x) { return x.LineRef == LineRef })
+                    .Where(function (x) { return x.RouteSections_Direction == DirectionRef })
                     .Select(function (x) { return x.Routes_Description })
+                    //.Select(function (x) { return x.Services_StandardService_Origin + ' - ' + x.Services_StandardService_Destination })
                     .ToArray();
 
 
@@ -71,7 +79,7 @@ function getLiveBus() {
 
                 google.maps.event.addListener(marker, 'click', (function (marker, i) {
                     return function () {
-                        infowindow.setContent('<p>' + journey + '</p><p>Line: ' + line.lineRef + '</p><p>' + line.direction + '</p>');
+                        infowindow.setContent('<p>' + journey[0] + '</p><p>Line: ' + line.lineRef + '</p><p>' + line.direction + '</p>');
                         infowindow.open(map, marker);
                     }
                 })(marker, i));
@@ -139,40 +147,41 @@ function getGeo() {
 
 }
 
-function getNearbyStopPoints() {
+function getNearbyStopPoints(place) {
 
     var html = [];
-    $.getJSON("bus-stops.json", function (data) {
+    DepartureTime
+        var journey = Enumerable.From(journeyCodes)
+                    .Where(function (x) { return x.Destination == place })
+            .Where(function (x) { return x.DepartureTime > Date() })
+                    .Select(function (x) { return x.Latitude+':'+ x.Longitude })
+                    .ToArray();
 
         /* loop through array */
-        $.each(data, function (index, d) {
-            var dist = getDistanceInKm(myLocation.Latitude, myLocation.Longitude, d.Latitude, d.Longitude);
-            html.push({ Name: d.Name, Latitude: d.Latitude, Longitude: d.Longitude, distance: dist });
+        $.each(journey, function (index, d) {
+
+            var cord = d.split(':');
+
+            var dist = getDistanceInKm(myLocation.Latitude, myLocation.Longitude, cord[0], cord[1]);
+            html.push({ Latitude: cord[0], Longitude: cord[1], distance: dist });
         });
 
-        var html2 = html.sort(SortByDistance);
+        html.sort(SortByDistance);
 
         // nearby Markers
-        for (i = 0; i < 20; i++) {
+        for (i = 0; i < 5; i++) {
             marker = new google.maps.Marker({
-                position: new google.maps.LatLng(html2[i].Latitude, html2[i].Longitude),
+                position: new google.maps.LatLng(html[i].Latitude, html[i].Longitude),
                 map: map
             });
 
             google.maps.event.addListener(marker, 'click', (function (marker, i) {
                 return function () {
-                    infowindow.setContent('' + html2[i].Name + '<br>' + html2[i].distance.toFixed(2) + 'km');
+                    infowindow.setContent('' + html[i].Name + '<br>' + html[i].distance.toFixed(2) + 'km');
                     infowindow.open(map, marker);
                 }
             })(marker, i));
         }
-
-
-    }).error(function (jqXHR, textStatus, errorThrown) { /* assign handler */
-        /* alert(jqXHR.responseText) */
-        alert("error occurred!");
-    });
-
 
 }
 
