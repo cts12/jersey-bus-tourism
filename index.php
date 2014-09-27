@@ -1,0 +1,33 @@
+<?php
+require 'app/views/header.php' ;
+?>
+ <!-- CONTENT SECTION -->
+            <div id="content-home">
+                <div class="btn-home-options">
+                    <a href="/bus-stops.php">
+                    <div class="home-icon">
+                        <img src="app/views/img/bus_stop_icon.png" alt="bus stop icon" />
+                    <p>Find nearest Bus Stop</p>
+                    </div>
+                    </a>
+                </div>
+
+                <div class="btn-home-options">
+                    <a href="pickdestination.html">
+                    <div class="home-icon">
+                         <img src="app/views/img/destination_icon.png" alt="destination icon" />
+                    <p>Choose a Destination</p>
+                    </div>
+                    </a>
+                </div>
+
+            </div>
+        <!-- END OF CONTENT SECTION -->
+
+
+<?php 
+
+require 'app/views/footer.php';
+
+?>
+
