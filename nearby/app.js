@@ -8,10 +8,11 @@ var map = new google.maps.Map(document.getElementById('map-canvas'), {
 var infowindow = new google.maps.InfoWindow();
 var marker, i;
 
-function goingTo(place)
-{
+var journeyCodes = [];
+var pointsOnRoute = [];
+var pointsNearMe = [];
 
-}
+
 
 function myLocationMarker() {
     // my Location Marker
@@ -104,6 +105,7 @@ function getGeo() {
         beforeSend: setHeader,
         success: function (data) {
 
+
             /* loop through array */
             $.each(data, function (i, d) {
 
@@ -115,15 +117,17 @@ function getGeo() {
 
 
                 var direction = '';
-                if (d.MonitoredVehicleJourney.DirectionRef == 'inbound')
-                    direction = 'Going to Town'
-                else
-                    return;//direction = 'Leaving Town'
+                //if (d.MonitoredVehicleJourney.DirectionRef == 'inbound')
+                //    direction = 'Going to Town'
+                //else
+                //    direction = 'Leaving Town'
 
                 var line = {
                     lineRef: d.MonitoredVehicleJourney.LineRef,
                     direction: direction
                 }
+
+                pointsNearMe.push(line);
 
                 marker = new google.maps.Marker({
                     position: new google.maps.LatLng(location.Latitude, location.Longitude),
@@ -149,57 +153,50 @@ function getGeo() {
 
 function getNearbyStopPoints(place) {
 
-    var html = [];
-    DepartureTime
-        var journey = Enumerable.From(journeyCodes)
-                    .Where(function (x) { return x.Destination == place })
-            .Where(function (x) { return x.DepartureTime > Date() })
-                    .Select(function (x) { return x.Latitude+':'+ x.Longitude })
-                    .ToArray();
 
-        /* loop through array */
-        $.each(journey, function (index, d) {
 
-            var cord = d.split(':');
+    var journey = Enumerable.From(journeyCodes)
+                .Where(function (x) { return x.Destination == place })
+                .Select(function (x) { return x.Latitude + ':' + x.Longitude + ':' + x.LineRef })
+                .ToArray();
 
-            var dist = getDistanceInKm(myLocation.Latitude, myLocation.Longitude, cord[0], cord[1]);
-            html.push({ Latitude: cord[0], Longitude: cord[1], distance: dist });
+    var points = [];
+    /* loop through array */
+    $.each(journey, function (index, d) {
+
+        var cord = d.split(':');
+
+        var dist = getDistanceInKm(myLocation.Latitude, myLocation.Longitude, cord[0], cord[1]);
+        points.push({ Latitude: cord[0], Longitude: cord[1], distance: dist, lineRef: cord[2] });
+    });
+
+   points.sort(SortByDistance);
+
+    // nearby Markers
+    for (i = 0; i < 5; i++) {
+
+        pointsOnRoute.push(points[i]);
+        marker = new google.maps.Marker({
+            position: new google.maps.LatLng(points[i].Latitude, points[i].Longitude),
+            map: map
         });
 
-        html.sort(SortByDistance);
-
-        // nearby Markers
-        for (i = 0; i < 5; i++) {
-            marker = new google.maps.Marker({
-                position: new google.maps.LatLng(html[i].Latitude, html[i].Longitude),
-                map: map
-            });
-
-            google.maps.event.addListener(marker, 'click', (function (marker, i) {
-                return function () {
-                    infowindow.setContent('' + html[i].Name + '<br>' + html[i].distance.toFixed(2) + 'km');
-                    infowindow.open(map, marker);
-                }
-            })(marker, i));
-        }
+        google.maps.event.addListener(marker, 'click', (function (marker, i) {
+            return function () {
+                infowindow.setContent('Line: ' + pointsOnRoute[i].lineRef + '<br>');
+                infowindow.open(map, marker);
+            }
+        })(marker, i));
+    }
 
 }
 
 function getJourneyCodes(callback) {
 
-    //var html = [];
-    //$.getJSON("journey-codes.json", function (data) {
-
-    //    callback(data);
-
-    //}).error(function (jqXHR, textStatus, errorThrown) { /* assign handler */
-    //    /* alert(jqXHR.responseText) */
-    //    alert("error occurred!");
-    //});
-
+    
     var html = [];
     $.ajax({
-        url: 'journey-codes.json',
+        url: 'routes.json',
         async: false,
         type: 'GET',
         dataType: 'json',
@@ -241,4 +238,34 @@ function SortByDistance(a, b) {
 
 function setHeader(xhr) {
     xhr.setRequestHeader("Authorization", "Basic aGFja2F0aG9uZGVtbzpoYWNrYXRob25kZW1v");
+}
+
+
+function showResult() {
+    var a = pointsOnRoute;
+    var b = pointsNearMe;
+
+    var same = true;
+
+    $.each(pointsOnRoute, function (i, a) {
+
+        $.each(pointsNearMe, function (j, b) {
+
+            same = (a.lineRef == b.lineRef);
+
+            if (same == false)
+                return false;
+        })
+
+    })
+
+    if (same == false) {
+        $('#result').html(pointsNearMe[0].lineRef);
+        $('#result').append('  -  ');
+        $('#result').append(pointsOnRoute[0].lineRef);
+    }
+    else
+    {
+        $('#result').html(pointsNearMe[0].lineRef);
+    }
 }

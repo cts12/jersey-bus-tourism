@@ -21,8 +21,10 @@
 
 	<!-- HEADER SECTION -->
 		<div id="headertop">
-				<h1><?=$heading?></h1>
-		</div>
+                <a href="index.php"><img src="app/views/img/omnibus-logo.png" alt="logo" height="25"></a>
+            </div>	
+				<h1> <?=$heading?></h1>
+		
 	<!-- END OF HEADER SECTION -->
 	
 <?
