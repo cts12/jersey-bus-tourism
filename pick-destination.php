@@ -27,7 +27,7 @@ require 'app/views/header.php' ;
                          <img src="app/views/img/logo_zoo.png" alt="zoo logo" />
                     <p>Durrell</p>
                     </div>
-                    </a>
+                </a>
                 </div>
 
 
