@@ -39,8 +39,7 @@ $(document).ready(function(){
 		var myLocation = {
 			Latitude: user.coords.latitude.toFixed(5),
 			Longitude: user.coords.longitude.toFixed(5)
-		}
-		
+
 		var mapOptions = {
 			zoom: 17,
 			center: new google.maps.LatLng(myLocation.Latitude, myLocation.Longitude),

@@ -20,13 +20,14 @@ require 'app/views/header.php' ;
                     </a>
                 </div>
 
+                <a href="/connect.php">
                 <div class="destination-box">
                     
                     <div class="home-icon">
                          <img src="app/views/img/logo_zoo.png" alt="zoo logo" />
                     <p>Durrell</p>
                     </div>
-                    
+                    </a>
                 </div>
 
 
