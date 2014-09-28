@@ -157,7 +157,7 @@ function getNearbyStopPoints(myLocation) {
         var html2 = html.sort(SortByDistance);
 
         // nearby Markers
-        for (i = 0; i < 8; i++) {
+        for (i = 0; i < 16; i++) {
             marker = new google.maps.Marker({
                 position: new google.maps.LatLng(html2[i].Latitude, html2[i].Longitude),
                 map: map
