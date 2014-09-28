@@ -468,7 +468,7 @@ label {
 .stop-info { }
 .bus-info { }
 
-#map-canvas { background:url('/app/views/img/loader.gif') no-repeat center center; }
+#map-canvas { background:url('/app/views/img/loader2.gif') no-repeat center center; }
 
 input[type='number'] {
     -moz-appearance:textfield;

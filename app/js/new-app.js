@@ -157,7 +157,7 @@ function getNearbyStopPoints(myLocation) {
         var html2 = html.sort(SortByDistance);
 
         // nearby Markers
-        for (i = 0; i < 5; i++) {
+        for (i = 0; i < 8; i++) {
             marker = new google.maps.Marker({
                 position: new google.maps.LatLng(html2[i].Latitude, html2[i].Longitude),
                 map: map
@@ -165,7 +165,14 @@ function getNearbyStopPoints(myLocation) {
 
             google.maps.event.addListener(marker, 'click', (function (marker, i) {
                 return function () {
-                    infowindow.setContent('<div class="map-info stop-info"><p>' + html2[i].Name + '</p><p>' + html2[i].distance.toFixed(2) + 'km</p><a href="#" data-code="' + html2[i].Code + '">Select</a></div>');
+					var howFar = html2[i].distance;
+					
+					if(howFar < 1)
+						howFar = (html2[i].distance * 1000).toFixed(0) + 'm';
+					else
+						howFar += 'km';
+						
+                    infowindow.setContent('<div class="map-info stop-info"><p>' + html2[i].Name + '</p><p>' + howFar + '</p><a href="#" data-code="' + html2[i].Code + '">Select</a></div>');
                     infowindow.open(map, marker);
                 }
             })(marker, i));
