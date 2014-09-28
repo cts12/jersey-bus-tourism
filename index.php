@@ -4,7 +4,7 @@ $meta = array(
 	'description' => '',
 	'keywords' => ''
 );
-$heading = 'GET A BUS TO...';
+$heading = 'FIND A BUS';
 
 require 'app/views/header.php' ;
 ?>
