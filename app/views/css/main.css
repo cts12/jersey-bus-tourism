@@ -436,6 +436,25 @@ label {
     height:450px;
 }
 
+.home-header-icon  {float:left; margin-left:5px;}
+.info-header-icon  {float:right; margin-right:5px;}
+
+#content-info {
+    padding:5%;
+    text-align: center;
+}
+
+#content-info p {
+    margin-bottom:20px;
+    line-height:1.5rem;   
+}
+
+#content-info .team-member {
+    padding:10px 0;
+    background:#ececec;
+}
+
+
 @media only screen and (max-width: 700px) {
 .starting-point, .code, .or{
     float:left;

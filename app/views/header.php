@@ -23,7 +23,9 @@
 
 	<!-- HEADER SECTION -->
 		<div id="headertop">
-                <a href="index.php"><img src="app/views/img/omnibus-logo.png" alt="logo" height="25"></a>
+				<a href="index.php" class="home-header-icon"><img src="app/views/img/home.png" alt="logo" height="20"></a>
+                <img src="app/views/img/omnibus-logo.png" alt="logo" height="25">
+                <a href="info.php" class="info-header-icon"><img src="app/views/img/info.png" alt="logo" height="20"></a>
             </div>	
 				<h1> <?=$heading?></h1>
 		
