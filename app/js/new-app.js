@@ -16,7 +16,7 @@ function myLocationMarker(myLocation) {
 
     google.maps.event.addListener(marker, 'click', (function (marker, i) {
         return function () {
-            infowindow.setContent('You are here');
+            infowindow.setContent('<div id="user-location" class="map-info"><h2>You are here</h2></div>');
             infowindow.open(map, marker);
         }
     })(marker, i));
@@ -72,7 +72,7 @@ function getLiveBus() {
 
                 google.maps.event.addListener(marker, 'click', (function (marker, i) {
                     return function () {
-                        infowindow.setContent('<p>' + journey[0] + '</p><p>Line: ' + line.lineRef + '</p><p>' + line.direction + '</p>');
+                        infowindow.setContent('<div class="map-info bus-info"><p>' + journey[0] + '</p><p>Line: ' + line.lineRef + '</p><p>' + line.direction + '</p></div>');
                         infowindow.open(map, marker);
                     }
                 })(marker, i));
@@ -151,7 +151,7 @@ function getNearbyStopPoints(myLocation) {
         /* loop through array */
         $.each(data, function (index, d) {
             var dist = getDistanceInKm(myLocation.Latitude, myLocation.Longitude, d.Latitude, d.Longitude);
-            html.push({ Name: d.Name, Latitude: d.Latitude, Longitude: d.Longitude, distance: dist });
+            html.push({ Name: d.Name, Latitude: d.Latitude, Longitude: d.Longitude, distance: dist, Code: d.Code });
         });
 
         var html2 = html.sort(SortByDistance);
@@ -165,7 +165,7 @@ function getNearbyStopPoints(myLocation) {
 
             google.maps.event.addListener(marker, 'click', (function (marker, i) {
                 return function () {
-                    infowindow.setContent('' + html2[i].Name + '<br>' + html2[i].distance.toFixed(2) + 'km');
+                    infowindow.setContent('<div class="map-info stop-info"><p>' + html2[i].Name + '</p><p>' + html2[i].distance.toFixed(2) + 'km</p><a href="#" data-code="' + html2[i].Code + '">Select</a></div>');
                     infowindow.open(map, marker);
                 }
             })(marker, i));
