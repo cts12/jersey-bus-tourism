@@ -16,14 +16,14 @@ function myLocationMarker(myLocation) {
 
     google.maps.event.addListener(marker, 'click', (function (marker, i) {
         return function () {
-            infowindow.setContent('Hello!');
+            infowindow.setContent('You are here');
             infowindow.open(map, marker);
         }
     })(marker, i));
 
 }
 
-function getLiveBus(myLocation) {
+function getLiveBus() {
 
     var html = [];
     $.ajax({
@@ -109,10 +109,10 @@ function getGeo(myLocation) {
 
 
                 var direction = '';
-                //if (d.MonitoredVehicleJourney.DirectionRef == 'inbound')
-                //    direction = 'Going to Town'
-                //else
-                //    direction = 'Leaving Town'
+                if (d.MonitoredVehicleJourney.DirectionRef == 'inbound')
+                    direction = 'Going to Town'
+                else
+                    direction = 'Leaving Town'
 
                 var line = {
                     lineRef: d.MonitoredVehicleJourney.LineRef,
@@ -143,7 +143,44 @@ function getGeo(myLocation) {
 
 }
 
-function getNearbyStopPoints(myLocation,place) {
+function getNearbyStopPoints(myLocation) {
+
+    var html = [];
+    $.getJSON("bus-stops.json", function (data) {
+
+        /* loop through array */
+        $.each(data, function (index, d) {
+            var dist = getDistanceInKm(myLocation.Latitude, myLocation.Longitude, d.Latitude, d.Longitude);
+            html.push({ Name: d.Name, Latitude: d.Latitude, Longitude: d.Longitude, distance: dist });
+        });
+
+        var html2 = html.sort(SortByDistance);
+
+        // nearby Markers
+        for (i = 0; i < 5; i++) {
+            marker = new google.maps.Marker({
+                position: new google.maps.LatLng(html2[i].Latitude, html2[i].Longitude),
+                map: map
+            });
+
+            google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                return function () {
+                    infowindow.setContent('' + html2[i].Name + '<br>' + html2[i].distance.toFixed(2) + 'km');
+                    infowindow.open(map, marker);
+                }
+            })(marker, i));
+        }
+
+
+    }).error(function (jqXHR, textStatus, errorThrown) { /* assign handler */
+        /* alert(jqXHR.responseText) */
+        console.log("error occurred!");
+    });
+
+   
+}
+
+function getNearbyStopPoints2(myLocation,place) {
 
 	var journey = Enumerable.From(journeyCodes)
                 .Where(function (x) { return x.Destination == place })

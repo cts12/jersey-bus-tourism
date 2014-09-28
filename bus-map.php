@@ -13,6 +13,9 @@ require 'app/views/header.php' ;
 
 				<div id="panel"></div>
 				<div id="map-canvas" style="width:100%; height:600px"></div>
+				
+				<button onclick="showResult()">Result</button>
+				<div id="result">result</div>
 
             </div>
  <!-- END OF CONTENT SECTION -->
@@ -48,17 +51,18 @@ require 'app/views/header.php' ;
 
 			map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
 		
-            getJourneyCodes();
 			myLocationMarker(myLocation);
-			getLiveBus(myLocation);
-			getGeo(myLocation);
-
+			getJourneyCodes();
+			getLiveBus();
+			getNearbyStopPoints(myLocation);
+			//getGeo(myLocation);
+            
             //Corbiere
             //L'Etacq
             //Durrell
             //Bus Station
             //Gorey Pier
-            getNearbyStopPoints('Gorey Pier');
+            //getNearbyStopPoints2(myLocation);
 
 		}
 
