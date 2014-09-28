@@ -48,14 +48,23 @@ require 'app/views/header.php' ;
 
 			map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
 		
+            getJourneyCodes();
 			myLocationMarker(myLocation);
 			getLiveBus(myLocation);
-			getNearbyStopPoints(myLocation);
+			getGeo(myLocation);
+
+            //Corbiere
+            //L'Etacq
+            //Durrell
+            //Bus Station
+            //Gorey Pier
+            getNearbyStopPoints('Gorey Pier');
+
 		}
 
 	});
 </script>
-<script src="/app/js/app.js"></script>
+<script src="/app/js/new-app.js"></script>
 
 <?php 
 require 'app/views/footer.php';

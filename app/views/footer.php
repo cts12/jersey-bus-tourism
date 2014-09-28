@@ -12,7 +12,7 @@
 <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
 <script src="/app/views/js/plugins.js"></script>
 <script src="/app/views/js/main.js"></script>
-<script src="/app/views/js/modernizr-2.6.2.min.js"></script>
+<script src="/app/js/modernizr-2.6.2.min.js"></script>
 
 <?php /*
 <script>
