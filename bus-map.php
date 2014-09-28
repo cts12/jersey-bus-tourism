@@ -8,16 +8,7 @@ $heading = 'YOUR NEAREST BUS STOPS';
 
 require 'app/views/header.php' ;
 ?>
-<style type="text/css">
-.map-info { min-width:100px; }
-	.map-info p { margin:5px auto; font-size:13px; }
-	.map-info a { display:inline-block; text-transform:uppercase; background:#000; color:#fff; line-height:2em; padding:0 10px; letter-spacing:1px; margin:5px 0 0; }
 
-#user-location { }
-	#user-location h2 { }
-.stop-info { }
-.bus-info { }
-</style>
 
  <!-- CONTENT SECTION -->
             <div id="content-home">
