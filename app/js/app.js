@@ -163,6 +163,8 @@ function showRoutes(mylocation, destlocation) {
             var dest_code = dest_stop.Code;
 
 
+
+
         }
     }
 
@@ -186,7 +188,7 @@ function closeRouteStops(mylocation) {
         /* loop through array */
         $.each(data, function (index, d) {
             var dist = getDistanceInKm(myLocation.Latitude, myLocation.Longitude, d.Latitude, d.Longitude);
-            html.push({ Name: d.Name, Latitude: d.Latitude, Longitude: d.Longitude, distance: dist, d.Code });
+            html.push({ Name: d.Name, Latitude: d.Latitude, Longitude: d.Longitude, distance: dist, code: d.Code });
         });
 
         var html2 = html.sort(SortByDistance);

@@ -68,7 +68,7 @@ ins {
 /* change colours to suit your needs */
 mark {
     background-color:#ff9;
-    color:#000; 
+    color:#000;
     font-style:italic;
     font-weight:bold;
 }
@@ -91,7 +91,7 @@ table {
 hr {
     display:block;
     height:1px;
-    border:0;   
+    border:0;
     border-top:1px solid #cccccc;
     margin:1em 0;
     padding:0;
@@ -201,8 +201,9 @@ textarea {
    ========================================================================== */
 body {
     background: #f7f7f7;
-    color: #0a0a0a;
+    color: #333;
     font-size:16px;
+    font-family: 'Open Sans', sans-serif;
 }
 
 #container {
@@ -213,12 +214,19 @@ body {
 }
 
 #headertop {
-    border-bottom:1px solid #d6d6d6;
     width:96%;
-    background:#f7f7f7;
     margin:0 auto;
-    padding:30px 2% 30px;
+    padding:20px 2%;
     text-align: center;
+    background: #6eb434; /* Old browsers */
+    background: -moz-linear-gradient(top,  #6eb434 0%, #82d63c 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6eb434), color-stop(100%,#82d63c)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #6eb434 0%,#82d63c 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #6eb434 0%,#82d63c 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #6eb434 0%,#82d63c 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #6eb434 0%,#82d63c 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6eb434', endColorstr='#82d63c',GradientType=0 ); /* IE6-9 */
+
 }
 
 #content {
@@ -236,7 +244,14 @@ body {
 }
 
 h1 {
-    font-size:2rem;
+    font-size:1.2em;
+    text-align: center;
+    padding:15px 0;
+    background:#f7f7f7;
+    color:#333;
+    border-top:1px solid #7abb43;
+    border-bottom:1px solid #d6d6d6;
+    font-weight:600;
 }
 
 p { margin-bottom:0.8rem;}
@@ -266,6 +281,7 @@ a:hover, a:active, a:focus
     padding:10px 2%;
     position:;
     text-align: center;
+    float:left;
 }
 
 .madeby {
@@ -298,8 +314,10 @@ a:focus .btn, a:hover .btn, a:active .btn {
 
 .btn-home-options {
   width:100%;
-  padding:70px 0 30px;
+  padding:30px 0 50px;
   border-bottom:1px solid #d6d6d6;
+  font-weight:400;
+  text-transform: uppercase;
 }
 .btn-home-options:last-of-type {
   border-bottom:0px;
@@ -332,12 +350,13 @@ a:focus .btn, a:hover .btn, a:active .btn {
 
 .home-icon {
   margin:0 auto;
-  width:50%;
-  height:150px;
+  width:100%;
+  height:100px;
+  text-align:center;
 }
 .home-icon a {
   background: #ccc;
-  color:green;
+  color:#6dbd2b;
 }
 
 .home-icon a:hover, .home-icon a:focus, .home-icon a:active {
@@ -348,6 +367,23 @@ a:focus .btn, a:hover .btn, a:active .btn {
 .home-icon img{
   margin-bottom: 20px;
   height:75px;
+}
+
+#content-pick-destination {
+margin:0;
+float:left;
+width:100%;
+background: #ececec;
+}
+
+.destination-box {
+    float:left;
+    display: block;
+    width:50%;
+    padding:30px 0 50px;
+    border-bottom:0px solid #d6d6d6;
+    font-weight:400;
+    text-transform: uppercase;
 }
 
 
