@@ -15,7 +15,7 @@ require 'app/views/header.php' ;
 .stop-info { }
 .bus-info { }
 
-#map-canvas { background:url('/app/views/img/loader.gif') no-repeat center center; }
+#map-canvas { background:url('/app/views/img/loader2.gif') no-repeat center center; }
 
 input[type='number'] {
     -moz-appearance:textfield;
@@ -127,7 +127,7 @@ $(document).ready(function(){
 		return ((aName < bName) ? -1 : ((aName > bName) ? 1 : 0));
 	}
 	
-	$(document).on('click',$('#start_select button'),function(e){
+	$(document).on('click','#start_select button',function(e){
 		e.preventDefault();
 		
 		var code = $('[name=start_code]').val();
