@@ -17,7 +17,9 @@ require 'app/views/header.php' ;
                 <p class="team-member">Sharkey</p>
                 <p class="team-member">Robbie</p>
                 <p class="team-member">Phil</p>
-
+                <p class="team-member">Ian</p>
+                <p class="team-member">Matt</p>
+                <p class="team-member">Rob</p>
             </div>
  <!-- END OF CONTENT SECTION -->
 

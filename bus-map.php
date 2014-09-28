@@ -143,7 +143,7 @@ $(document).ready(function(){
 				//console.log(data);
 				
 				var output = '<div id="results">';
-				
+				output += '<img src="/app/views/img/arrived_icon.png" alt=""/>';
 				output += '<h2>' + stopName + '</h2>';
 				
 				var date = data.ETA;
@@ -156,11 +156,11 @@ $(document).ready(function(){
 					m = m < 10 ? '0' + m : m;
 				var due = h + ":" + m;
 				
-				output += '<span class="route_' + data.ServiceName + '">' + data.ServiceName + ' to ' + data.Destination + ' @ ' + due + '</span>';
+				output += '<span class="route route_' + data.ServiceName + '"><span>' + data.ServiceName + '</span> to ' + data.Destination + ' @ ' + due + '</span>';
 				
 				output += '</div>';
 				
-				$('#container h1').html('Your Next Buses');
+				$('#container h1').html('Your Next Bus(es)');
 				$('#start_journey').remove();
 				$('#map-canvas').html(output);
 			},
