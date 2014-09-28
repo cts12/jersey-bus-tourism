@@ -9,7 +9,6 @@ $heading = 'YOUR NEAREST BUS STOPS';
 require 'app/views/header.php' ;
 ?>
 
-
  <!-- CONTENT SECTION -->
             <div id="content-home">
 
@@ -87,7 +86,7 @@ $(document).ready(function(){
 					start_select += '<option value="' + v.Latitude + '|' + v.Longitude + '">' + v.Name + '</option>';					
 				});
 		
-				start_select += '</select></div><div class="or">or</div><div class="code"><label for="start_code">ENTER CODE:</label> <input name="start_code" type="number" value="" maxlength="4"/> <button type="submit" class="code-submit">Go</button></div></form></div>';
+				start_select += '</select></div><div class="or">or</div><div class="code"><label for="start_code">ENTER CODE:</label> <input name="start_code" type="number" value="" maxlength="4"/> <button class="code-submit">Go</button></div></form></div>';
 				
 				$('#map-canvas').before(start_select);
 			}
@@ -110,7 +109,7 @@ $(document).ready(function(){
 		return ((aName < bName) ? -1 : ((aName > bName) ? 1 : 0));
 	}
 	
-	$(document).on('click',$('#start_select button'),function(e){
+	$(document).on('submit',$('#start_journey form'),function(e){
 		e.preventDefault();
 		
 		var code = $('[name=start_code]').val();
