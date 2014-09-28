@@ -131,8 +131,8 @@ function deg2rad(deg) {
 }
 
 function SortByDistance(a, b) {
-    var aName = a.distance;
-    var bName = b.distance;
+    var aName = a.Distance;
+    var bName = b.Distance;
     return ((aName < bName) ? -1 : ((aName > bName) ? 1 : 0));
 }
 
@@ -141,78 +141,129 @@ function setHeader(xhr) {
     xhr.setRequestHeader("Authorization", "Basic aGFja2F0aG9uZGVtbzpoYWNrYXRob25kZW1v");
 }
 
-function showRoutes(mylocation, destlocation) {
+function showRoutes(myLocation, destLocation) {
 
     //my closest bus stops
     //infor available are geo co-ordinates.
-    var my_close_stops = closeRouteStops(mylocation);
+    console.log(destLocation);
+    tester(myLocation, function(my_close_stops) {
 
+        closeRouteStops(destLocation, function(dest_stops) {
 
-    var dest_stops = closeRouteStops(destlocation);
+          //get our markers and the destination markers
 
-    //get our markers and the destination markers
+            for(var i = 0 ; i < 4 ; i++){
 
-    for(var i = 0 ; i < my_close_stops.length ; i++){
+                var my_stop = my_close_stops[i];
+                var my_code = my_stop.Code;
+                console.log(my_stop);
+                for(var j = 0 ; j < 2 ; j++){
 
-        var my_stop = my_close_stops[i];
-        var my_code = my_stop.Code;
+                    var dest_stop = dest_stops[j];
+                    var dest_code = dest_stop.Code;
+                     console.log(dest_stop);
+                    $.ajax({
+                        //pass through the code parameters here.
+                        url: 'https://bus.data.je/paths/' + my_code + '/' + dest_code,
+                        type: 'GET',
+                        dataType: 'json',
+                        beforeSend: setHeader,
+                        async: false,
+                        success: function(data){
+                            var polyline_enc = data.PolyPoints;
+                            // console.log(polyline_enc);
+                            var polylines = polyline_enc.split(" ");;
+                            for (var q=0; q < polylines.length ; q = q + 1) {
+                                var polyline = polylines[q].replace(" ", "");
+                                
+                                var points = [];
+                                var pts = [];
+                                try {
+                                    pts = google.maps.geometry.encoding.decodePath(polyline);
+                                }catch (e) {
+                                    console.log(e);
+                                }
+                                console.log(pts);
+                                 //
+                                if (pts.length == 0) {
+                                    return;
+                                }
+                                //
+                                for (var ii = 0; ii< pts.length; ii++) {
+                                    var p = pts[ii];
+                                
+                                    var ll = new google.maps.LatLng(p.k, p.B);
+                            
+                                    points.push(ll);
+                                }
+                               
+                                //
 
-        for(var j = 0 ; j < dest_stops.length ; j++){
+                                var flightPath = new google.maps.Polyline({
+                                    path: points,
+                                    geodesic: true,
+                                    strokeColor: '#FF0000',
+                                    strokeOpacity: 1.0,
+                                    strokeWeight: 2
+                                });
+                                //
+                                flightPath.setMap(mapdest);
+                            }
 
-            var dest_stop = dest_stops[j];
-            var dest_code = dest_stop.Code;
+                        },
+                       error: function () { console.log('error'); }
 
-
-
-
-        }
-    }
-
-
-
-    // google.maps.event.addListener(marker, 'click', (function (marker, i) {
-    //             return function () {
-    //                 infowindow.setContent('' + html2[i].Name + '<br>' + html2[i].distance.toFixed(2) + 'km');
-    //                 infowindow.open(map, marker);
-    //             }
-    //         })(marker, i));
-    //     }
-
-
+                    });
+                }
+            }
+        });
+    });
 }
 
-function closeRouteStops(mylocation) {
+
+function closeRouteStops(myLocation, callback) {
+    console.log(myLocation);
     var html = [];
     $.getJSON("bus-stops.json", function (data) {
-
         /* loop through array */
         $.each(data, function (index, d) {
+            if(d.Code == '3986' || d.Code == '3782'){
             var dist = getDistanceInKm(myLocation.Latitude, myLocation.Longitude, d.Latitude, d.Longitude);
-            html.push({ Name: d.Name, Latitude: d.Latitude, Longitude: d.Longitude, distance: dist, code: d.Code });
-        });
+            html.push({ Name: d.Name, Latitude: d.Latitude, Longitude: d.Longitude, Distance: dist, Code: d.Code });
+            }
+        })
 
-        var html2 = html.sort(SortByDistance);
-
-        // nearby Markers
-        // var markers = []
-        // for (i = 0; i < 5; i++) {
-
-        //     markers.push(marker = new google.maps.Marker({
-        //         position: new google.maps.LatLng(html2[i].Latitude, html2[i].Longitude),
-        //         map: map
-        //     }));
-
-        // }
-
-        // return markers;
-
-        return html2; 
+           var html2 = html.sort(SortByDistance);
+        callback(html2);
 
     }).error(function (jqXHR, textStatus, errorThrown) { /* assign handler */
         /* alert(jqXHR.responseText) */
         alert("error occurred!");
     });
 
+}
 
+
+function tester(myLocation, callback) {
+    console.log(myLocation);
+    var html = [];
+    $.getJSON("bus-stops.json", function (data) {
+        /* loop through array */
+        $.each(data, function (index, d) {
+            if(d.Code == '2734' || d.Code == '3763' || d.Code ==  '2867' || d.Code == '3729'){
+
+
+            var dist = getDistanceInKm(myLocation.Latitude, myLocation.Longitude, d.Latitude, d.Longitude);
+            html.push({ Name: d.Name, Latitude: d.Latitude, Longitude: d.Longitude, Distance: dist, Code: d.Code });
+            }
+        })
+
+        var html2 = html.sort(SortByDistance);
+        callback(html2);
+
+    }).error(function (jqXHR, textStatus, errorThrown) { /* assign handler */
+        /* alert(jqXHR.responseText) */
+        alert("error occurred!");
+    });
 
 }

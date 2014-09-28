@@ -309,3 +309,41 @@ function showResult() {
         $('#result').html(pointsNearMe[0].lineRef);
     }
 }
+
+function getCloseStopPoints(myLocation) {
+
+    var html = [];
+    $.getJSON("bus-stops.json", function (data) {
+
+        /* loop through array */
+        $.each(data, function (index, d) {
+            var dist = getDistanceInKm(myLocation.Latitude, myLocation.Longitude, d.Latitude, d.Longitude);
+            html.push({ Name: d.Name, Latitude: d.Latitude, Longitude: d.Longitude, distance: dist, Code: d.Code });
+        });
+        console.log(3);
+        var html2 = html.sort(SortByDistance);
+        return html2;
+        // nearby Markers
+        // for (i = 0; i < 5; i++) {
+        //     console.log(html[i].Code);
+        //     marker = new google.maps.Marker({
+        //         position: new google.maps.LatLng(html2[i].Latitude, html2[i].Longitude),
+        //         map: map
+        //     });
+
+        //     google.maps.event.addListener(marker, 'click', (function (marker, i) {
+        //         return function () {
+        //             infowindow.setContent('' + html2[i].Name + '<br>' + html2[i].distance.toFixed(2) + 'km');
+        //             infowindow.open(map, marker);
+        //         }
+        //     })(marker, i));
+        // }
+
+
+    }).error(function (jqXHR, textStatus, errorThrown) { /* assign handler */
+        /* alert(jqXHR.responseText) */
+        console.log("error occurred!");
+    });
+
+   
+}
