@@ -32,19 +32,20 @@ $(document).ready(function(){
 		alert('Functionality not available');
 	}
 	
-	function initialize(user) {	
+	function initialize(user){
 		
 		//console.log(user);
 		
 		var myLocation = {
 			Latitude: user.coords.latitude.toFixed(5),
 			Longitude: user.coords.longitude.toFixed(5)
-
+		};
+		
 		var mapOptions = {
 			zoom: 17,
 			center: new google.maps.LatLng(myLocation.Latitude, myLocation.Longitude),
 			mapTypeId: google.maps.MapTypeId.ROADMAP
-		  };
+		};
 
 		map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
 	
