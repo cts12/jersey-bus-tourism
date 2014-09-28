@@ -479,6 +479,29 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
 
+#results h2 { margin-bottom:20px; font-size:1.5rem; }
+#results img { margin-top:-15px; }
+#results span.route { font-size:1.5rem; }
+#results span span { color:#fff; display:inline-block; padding:4px 8px; font-weight:700; }
+	#results span.route_1 span { background:#282787; }
+	#results span.route_1A span { background:#FAA90B; }
+	#results span.route_2 span { background:#CD0D77; }
+	#results span.route_3 span { background:#FD6516; }
+	#results span.route_4 span { background:#55BB58; }
+	#results span.route_8 span { background:#FEABBA; }
+	#results span.route_12 span { background:#F22A17; }
+	#results span.route_12X span { background:#F22A17; }
+	#results span.route_13 span { background:#066980; }
+	#results span.route_14 span { background:#506751; }
+	#results span.route_15 span { background:#03A9EF; }
+	#results span.route_16 span { background:#026F2E; }
+	#results span.route_19 span { background:#B7AC91	; }
+	#results span.route_21 span { background:#A44A2D; }
+	#results span.route_23 span { background:#8CD3F7; }
+	#results span.route_25 span { background:#DCDA28; }
+	#results span.route_27 span { background:#F24C9D; }
+	#results span.route_28 span { background:#03A898; }
+
 @media only screen and (max-width: 700px) {
 .starting-point, .code, .or{
     float:left;
