@@ -436,6 +436,33 @@ label {
     height:450px;
 }
 
+.home-header-icon  {float:left; margin-left:5px;}
+.info-header-icon  {float:right; margin-right:5px;}
+
+#content-info {
+    padding:5%;
+    text-align: center;
+}
+
+#content-info p {
+    margin-bottom:20px;
+    line-height:1.5rem;
+}
+
+#content-info .team-member {
+    padding:10px 0;
+    background:#ececec;
+}
+
+.map-info { min-width:120px; }
+    .map-info p { margin:5px auto; font-size:13px; }
+    .map-info a { display:inline-block; text-transform:uppercase; background:#7abb43; color:#fff; line-height:2em; padding:0 10px; letter-spacing:1px; margin:5px 0 0; font-weight:600;}
+
+#user-location { }
+    #user-location h2 { }
+.stop-info { }
+.bus-info { }
+
 @media only screen and (max-width: 700px) {
 .starting-point, .code, .or{
     float:left;
