@@ -17,6 +17,17 @@ require 'app/views/header.php' ;
 	#user-location h2 { }
 .stop-info { }
 .bus-info { }
+
+#map-canvas { background:url('/app/views/img/loader.gif') no-repeat center center; }
+
+input[type='number'] {
+    -moz-appearance:textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
 </style>
 
  <!-- CONTENT SECTION -->
@@ -62,6 +73,8 @@ $(document).ready(function(){
 		};
 
 		map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+	
+		$('#map-canvas').css('background','none');
 	
 		myLocationMarker(myLocation);
 		getJourneyCodes();
