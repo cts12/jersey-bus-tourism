@@ -16,7 +16,7 @@ function myLocationMarker(myLocation) {
 
     google.maps.event.addListener(marker, 'click', (function (marker, i) {
         return function () {
-            infowindow.setContent('You are here');
+            infowindow.setContent('<div id="user-location" class="map-info"><h2>You are here</h2></div>');
             infowindow.open(map, marker);
         }
     })(marker, i));
@@ -72,7 +72,7 @@ function getLiveBus() {
 
                 google.maps.event.addListener(marker, 'click', (function (marker, i) {
                     return function () {
-                        infowindow.setContent('<p>' + journey[0] + '</p><p>Line: ' + line.lineRef + '</p><p>' + line.direction + '</p>');
+                        infowindow.setContent('<div class="map-info bus-info"><p>' + journey[0] + '</p><p>Line: ' + line.lineRef + '</p><p>' + line.direction + '</p></div>');
                         infowindow.open(map, marker);
                     }
                 })(marker, i));
@@ -157,8 +157,7 @@ function getNearbyStopPoints(myLocation) {
         var html2 = html.sort(SortByDistance);
 
         // nearby Markers
-        for (i = 0; i < 5; i++) {
-            console.log(html[i].Code);
+        for (i = 0; i < 16; i++) {
             marker = new google.maps.Marker({
                 position: new google.maps.LatLng(html2[i].Latitude, html2[i].Longitude),
                 map: map
@@ -166,7 +165,14 @@ function getNearbyStopPoints(myLocation) {
 
             google.maps.event.addListener(marker, 'click', (function (marker, i) {
                 return function () {
-                    infowindow.setContent('' + html2[i].Name + '<br>' + html2[i].distance.toFixed(2) + 'km');
+					var howFar = html2[i].distance;
+					
+					if(howFar < 1)
+						howFar = (html2[i].distance * 1000).toFixed(0) + 'm';
+					else
+						howFar += 'km';
+						
+                    infowindow.setContent('<div class="map-info stop-info"><p>' + html2[i].Name + '</p><p>' + howFar + '</p><a href="#" data-code="' + html2[i].Code + '">Select</a></div>');
                     infowindow.open(map, marker);
                 }
             })(marker, i));

@@ -286,7 +286,7 @@ a:hover, a:active, a:focus
 
 .madeby {
     font-size:0.8rem;
-    margin-top:70px;
+    margin-top:10px;
     margin-bottom:20px;
 }
 
@@ -373,7 +373,7 @@ a:focus .btn, a:hover .btn, a:active .btn {
 margin:0;
 float:left;
 width:100%;
-background: #ececec;
+background: #ececec;x
 }
 
 .destination-box {
@@ -386,9 +386,110 @@ background: #ececec;
     text-transform: uppercase;
 }
 
+#start_journey {
+    padding:15px 0;
+    background:;
+    border-bottom:1px solid #d6d6d6;
+    float:left;
+    width:100%;
+    min-height: 25px;
+}
 
+.starting-point {
+    float:left;
+    width:48%;
+    display: block;
+    text-align: right;
+}
 
+.or {
+ width:4%;
+ float: left;
+ font-style: italic;
+ margin-top:3px;
+}
 
+.code {
+ width:48%;
+ float: left;
+ display: block;
+ text-align: left;
+}
+
+.code-submit {
+    width:50px;
+    height:25px;
+    border-radius: 0;
+    border:none;
+    background:#7abb43;
+    color:white;
+    margin-left:5px;
+}
+
+label {
+    position: relative;
+    top: 2px;
+}
+
+#map-canvas {
+    float:left;
+    height:450px;
+}
+
+.home-header-icon  {float:left; margin-left:5px;}
+.info-header-icon  {float:right; margin-right:5px;}
+
+#content-info {
+    padding:5%;
+    text-align: center;
+}
+
+#content-info p {
+    margin-bottom:20px;
+    line-height:1.5rem;
+}
+
+#content-info .team-member {
+    padding:10px 0;
+    background:#ececec;
+}
+
+.map-info { min-width:120px; }
+    .map-info p { margin:5px auto; font-size:13px; }
+    .map-info a { display:inline-block; text-transform:uppercase; background:#7abb43; color:#fff; line-height:2em; padding:0 10px; letter-spacing:1px; margin:5px 0 0; font-weight:600;}
+
+#user-location { }
+    #user-location h2 { }
+.stop-info { }
+.bus-info { }
+
+#user-location { }
+    #user-location h2 { }
+.stop-info { }
+.bus-info { }
+
+#map-canvas { background:url('/app/views/img/loader2.gif') no-repeat center center; }
+
+input[type='number'] {
+    -moz-appearance:textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+@media only screen and (max-width: 700px) {
+.starting-point, .code, .or{
+    float:left;
+    width:100%;
+    display: block;
+    text-align: center;
+}
+
+.or { margin:10px 0;}
+
+}
 
 
 
