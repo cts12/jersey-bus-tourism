@@ -11,7 +11,7 @@ require 'app/views/header.php' ;
  <!-- CONTENT SECTION -->
             <div id="content-home">
                 <div class="btn-home-options">
-                    <a href="/bus-map.php">
+                    <a href="/bus-map.php" tabindex="1">
                     <div class="home-icon">
                         <img src="app/views/img/bus_stop_icon.png" alt="bus stop icon" />
                     <p>Find nearest Bus Stop</p>
