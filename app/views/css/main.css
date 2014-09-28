@@ -463,6 +463,22 @@ label {
 .stop-info { }
 .bus-info { }
 
+#user-location { }
+    #user-location h2 { }
+.stop-info { }
+.bus-info { }
+
+#map-canvas { background:url('/app/views/img/loader.gif') no-repeat center center; }
+
+input[type='number'] {
+    -moz-appearance:textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
 @media only screen and (max-width: 700px) {
 .starting-point, .code, .or{
     float:left;
