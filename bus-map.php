@@ -12,7 +12,7 @@ require 'app/views/header.php' ;
             <div id="content-home">
 
 				<div id="panel"></div>
-				<div id="map-canvas" style="width:100%; height:600px"></div>
+				<div id="map-canvas" style="width:100%"></div>
 
             </div>
  <!-- END OF CONTENT SECTION -->
@@ -74,13 +74,13 @@ $(document).ready(function(){
 			if(typeof stops == 'object'){
 				var sortedStops = stops.sort(SortByName);
 				
-				var start_select = '<div id="start_journey"><form><label for="start_select">Select starting point:</label> <select name="start_select"><option></option>';
+				var start_select = '<div id="start_journey"><form><div class="starting-point"><label for="start_select"> STARTING AT:</label> <select name="start_select"><option></option>';
 				
 				$.each(sortedStops, function(index, v){
 					start_select += '<option value="' + v.Latitude + '|' + v.Longitude + '">' + v.Name + '</option>';					
 				});
 		
-				start_select += '</select>&nbsp;&nbsp;&nbsp;<i>or</i>&nbsp;&nbsp;&nbsp;<label for="start_code">Enter code:</label> <input name="start_code" type="number" value="" maxlength="4"/> <button type="submit">Go</button></form></div>';
+				start_select += '</select></div><div class="or">or</div><div class="code"><label for="start_code">ENTER CODE:</label> <input name="start_code" type="number" value="" maxlength="4"/> <button type="submit" class="code-submit">Go</button></div></form></div>';
 				
 				$('#map-canvas').before(start_select);
 			}
