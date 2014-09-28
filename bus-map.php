@@ -153,10 +153,10 @@ $(document).ready(function(){
 				var h = formattedDate.getHours();
 					h = h < 10 ? '0' + h : h;
 				var m =  formattedDate.getMinutes();
-				
+					m = m < 10 ? '0' + m : m;
 				var due = h + ":" + m;
 				
-				output += data.ServiceName + ' to ' + data.Destination + ' @ ' + due;
+				output += '<span class="route_' + data.ServiceName + '">' + data.ServiceName + ' to ' + data.Destination + ' @ ' + due + '</span>';
 				
 				output += '</div>';
 				
