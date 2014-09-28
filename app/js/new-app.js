@@ -80,7 +80,7 @@ function getLiveBus() {
 
 
         },
-        error: function () { alert('boo!'); },
+        error: function () { console.log('error :('); },
 
     });
 
@@ -137,7 +137,7 @@ function getGeo(myLocation) {
 
 
         },
-        error: function () { alert('boo!'); },
+        error: function () { console.log('error :('); },
 
     });
 
@@ -244,7 +244,7 @@ function getJourneyCodes(callback) {
         success: function (data) {
             journeyCodes = data;
         },
-        error: function () { alert('boo!'); },
+        error: function () { console.log('error :('); },
 
     });
 

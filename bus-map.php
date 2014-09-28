@@ -131,7 +131,40 @@ $(document).ready(function(){
 		e.preventDefault();
 		var stopCode = $(this).data('code');
 		
-		console.log(stopCode);
+		$.ajax({
+			url: 'https://bus.data.je/stops/' + stopCode + '/buses',
+			type: 'GET',
+			dataType: 'json',
+			beforeSend: setHeader,
+			success: function (data) {
+			
+				//console.log(data);
+				
+				var output = '<div id="results">';
+				
+				var date = data.ETA;
+				date = date.substring(0, date.length-6);
+				
+				var formattedDate = new Date(Date.parse(date));
+				var h = formattedDate.getHours();
+					h = h < 10 ? '0' + h : h;
+				var m =  formattedDate.getMinutes();
+				
+				var due = h + ":" + m;
+				
+				output += data.ServiceName + ' to ' + data.Destination + ' @ ' + due;
+				
+				output += '</div>';
+				
+				$('#container h1').html('Your Next Buses');
+				$('#start_journey').remove();
+				$('#map-canvas').html(output);
+			},
+			error: function () {
+				console.log('error :(');
+				$('#map-canvas').html('Error!');
+			}
+		});
 	});
 
 });
