@@ -20,7 +20,7 @@ require 'app/views/header.php' ;
                     </a>
                 </div>
 
-                <a href="/connect.php">
+                <a href="/bus-map.php">
                 <div class="destination-box">
                     
                     <div class="home-icon">
