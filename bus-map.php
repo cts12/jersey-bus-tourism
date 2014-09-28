@@ -129,11 +129,13 @@ $(document).ready(function(){
 
 	$(document).on('click','.stop-info a',function(e){
 		e.preventDefault();
-		var stopCode = $(this).data('code');
+		var stopCode = $(this).data('code'),
+			stopName = $(this).parent().find('p').html();
 		
 		$.ajax({
 			url: 'https://bus.data.je/stops/' + stopCode + '/buses',
 			type: 'GET',
+			data: stopName,
 			dataType: 'json',
 			beforeSend: setHeader,
 			success: function (data) {
@@ -141,6 +143,8 @@ $(document).ready(function(){
 				//console.log(data);
 				
 				var output = '<div id="results">';
+				
+				output += '<h2>' + stopName + '</h2>';
 				
 				var date = data.ETA;
 				date = date.substring(0, date.length-6);
