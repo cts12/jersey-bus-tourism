@@ -46,18 +46,16 @@ function getLiveBus() {
                     //.Select(function (x) { return x.Services_StandardService_Origin + ' - ' + x.Services_StandardService_Destination })
                     .ToArray();
 
-
                 var location = {
                     Latitude: d[0].loc.coordinates[1],
                     Longitude: d[0].loc.coordinates[0]
                 }
 
-
                 var direction = '';
                 if (d[0].MonitoredVehicleJourney.DirectionRef == 'inbound')
                     direction = 'Going to Town'
                 else
-                    return;//direction = 'Leaving Town'
+                    direction = 'Leaving Town'
 
                 var line = {
                     lineRef: d[0].MonitoredVehicleJourney.LineRef,

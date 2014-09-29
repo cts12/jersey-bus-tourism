@@ -158,7 +158,7 @@ $(document).ready(function(){
 				
 				output += '<span class="route route_' + data.ServiceName + '"><span>' + data.ServiceName + '</span> to ' + data.Destination + ' @ ' + due + '</span>';
 				
-				output += '</div>';
+				output += '</div><br/><br/><p><i>Please note that this data is static and does not yet reflect live bus times.</i></p>';
 				
 				$('#container h1').html('Your Next Bus(es)');
 				$('#start_journey').remove();
