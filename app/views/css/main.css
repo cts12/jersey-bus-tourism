@@ -1,8 +1,8 @@
-/* 
+/*
 html5doctor.com Reset Stylesheet
 v1.6.1
 Last Updated: 2010-09-17
-Author: Richard Clark - http://richclarkdesign.com 
+Author: Richard Clark - http://richclarkdesign.com
 Twitter: @rich_clark
 */
 
@@ -15,7 +15,7 @@ b, i,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, figcaption, figure, 
+article, aside, canvas, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section, summary,
 time, mark, audio, video {
     margin:0;
@@ -32,7 +32,7 @@ body {
 }
 
 article,aside,details,figcaption,figure,
-footer,header,hgroup,menu,nav,section { 
+footer,header,hgroup,menu,nav,section {
     display:block;
 }
 
@@ -200,15 +200,15 @@ textarea {
    Author's custom styles
    ========================================================================== */
 body {
-    background: #f7f7f7;
-    color: #333;
+    background: #FFF;
+    color: #000;
     font-size:16px;
     font-family: 'Open Sans', sans-serif;
 }
 
 #container {
     width:100%;
-    background: #f7f7f7;
+    background: #fdfdfd;
     margin:0 auto;
     height:568px;
 }
@@ -216,29 +216,25 @@ body {
 #headertop {
     width:96%;
     margin:0 auto;
-    padding:20px 2%;
+    padding:15px 2% 20px;
     text-align: center;
-    background: #6eb434; /* Old browsers */
-    background: -moz-linear-gradient(top,  #6eb434 0%, #82d63c 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6eb434), color-stop(100%,#82d63c)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  #6eb434 0%,#82d63c 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  #6eb434 0%,#82d63c 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  #6eb434 0%,#82d63c 100%); /* IE10+ */
-    background: linear-gradient(to bottom,  #6eb434 0%,#82d63c 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6eb434', endColorstr='#82d63c',GradientType=0 ); /* IE6-9 */
+    background: #fff;
+}
 
+.logo img {
+    height:50px;
 }
 
 #content {
     padding:10px 5%;
-    background:#ececec;
+    background:#F1F1F1;
     text-align: center;
     padding-bottom: 50px;
 }
 
 #content-home {
     padding:0px;
-    background:#ececec;
+    background:#F9F9F9;
     text-align: center;
 
 }
@@ -247,26 +243,30 @@ h1 {
     font-size:1.2em;
     text-align: center;
     padding:15px 0;
-    background:#f7f7f7;
-    color:#333;
-    border-top:1px solid #7abb43;
-    border-bottom:1px solid #d6d6d6;
-    font-weight:600;
+    background:#fdfdfd;
+    color:#000;
+    border-top:1px solid #DBDBDB;
+    border-bottom:1px solid #DBDBDB;
+    font-weight:300;
 }
 
 p { margin-bottom:0.8rem;}
 
 a
  {
-    color:#7abb43;
+    color:#636E7C;
     text-decoration: none;
 }
 
 a:hover, a:active, a:focus
  {
-    color:#7abb43;
+    color:#96DCFC;
     text-decoration: none;
 }
+
+i { color:#636E7C;}
+
+i:active, i:hover, i:focus { color:#39A7DB;}
 
 .intro-text {
     margin-top:50px;
@@ -274,9 +274,9 @@ a:hover, a:active, a:focus
 }
 
 #footerbottom {
-    border-top:1px solid #d6d6d6;
+    border-top:1px solid #DBDBDB;
     width:96%;
-    background:#f7f7f7;
+    background:#fdfdfd;
     margin:0 auto;
     padding:10px 2%;
     position:;
@@ -316,11 +316,24 @@ a:focus .btn, a:hover .btn, a:active .btn {
   width:100%;
   padding:30px 0 50px;
   border-bottom:1px solid #d6d6d6;
-  font-weight:400;
+  font-weight:300;
   text-transform: uppercase;
 }
 .btn-home-options:last-of-type {
   border-bottom:0px;
+}
+
+.btn-home-options:hover, .btn-home-options:focus, .btn-home-options:active {
+  background:#F1F1F1;
+
+}
+
+.btn-home-options:hover p, .btn-home-options:focus p, .btn-home-options:active p {
+  color:#000000;
+}
+
+.btn-home-options:hover i, .btn-home-options:focus i, .btn-home-options:active i {
+  color:#39A8DB;
 }
 
 .map-text {
@@ -356,17 +369,12 @@ a:focus .btn, a:hover .btn, a:active .btn {
 }
 .home-icon a {
   background: #ccc;
-  color:#6dbd2b;
+  color:#D8D8D8;
 }
 
-.home-icon a:hover, .home-icon a:focus, .home-icon a:active {
-  background: #6dbd2b;
-  color:white;
-}
-
-.home-icon img{
-  margin-bottom: 20px;
-  height:75px;
+.home-icon i{
+  margin: 20px 0;
+  color:#636e7c;
 }
 
 #content-pick-destination {
@@ -436,8 +444,8 @@ label {
     height:450px;
 }
 
-.home-header-icon  {float:left; margin-left:5px;}
-.info-header-icon  {float:right; margin-right:5px;}
+.home-header-icon  {position:absolute; top:30px; left:20px; font-size:14px;}
+.info-header-icon  {position:absolute; top:30px; right:20px; font-size:14px;}
 
 #content-info {
     padding:5%;
@@ -468,7 +476,7 @@ label {
 .stop-info { }
 .bus-info { }
 
-#map-canvas { background:url('/app/views/img/loader2.gif') no-repeat center center; }
+#map-canvas { background:url('/app/views/img/loader.gif') no-repeat center center; }
 
 input[type='number'] {
     -moz-appearance:textfield;

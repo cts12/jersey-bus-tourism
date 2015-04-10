@@ -13,7 +13,7 @@ require 'app/views/header.php' ;
                 <div class="btn-home-options">
                     <a href="/bus-map.php" tabindex="1">
                     <div class="home-icon">
-                        <img src="app/views/img/bus_stop_icon.png" alt="bus stop icon" />
+                       <i class="fa fa-street-view fa-3x"></i>
                     <p>Find nearest Bus Stop</p>
                     </div>
                     </a>
@@ -22,7 +22,7 @@ require 'app/views/header.php' ;
                 <div class="btn-home-options">
                     <a href="pick-destination.php">
                     <div class="home-icon">
-                         <img src="app/views/img/destination_icon.png" alt="destination icon" />
+                         <i class="fa fa-map-marker fa-3x"></i>
                     <p>Choose a Destination</p>
                     </div>
                     </a>
@@ -31,5 +31,5 @@ require 'app/views/header.php' ;
             </div>
  <!-- END OF CONTENT SECTION -->
 
-<?php 
+<?php
 require 'app/views/footer.php';
